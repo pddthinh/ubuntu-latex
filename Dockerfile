@@ -4,16 +4,21 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
 
-RUN apt-get update -q && apt-get install -qy --no-install-recommends \
+RUN apt-get update -q
+
+RUN apt-get install -qy --no-install-recommends \
 	libgl1-mesa-dri \
 	libgl1-mesa-glx \
+    make git
+
+RUN apt-get install -qy --no-install-recommends \
 	texmaker \
     texlive-full \
     fonts-lmodern \
     fonts-font-awesome \
-    python-pygments gnuplot \
-    make git \
-    && apt-get autoclean -y \
+    python-pygments gnuplot
+
+RUN apt-get autoclean -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
